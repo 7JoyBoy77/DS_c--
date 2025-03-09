@@ -12,7 +12,6 @@ void Vector<T>::copyFrom(T *const A, Rank lo, Rank hi)
         _elem[_size++] = A[lo++];
     }
 }
-
 template <typename T>
 Vector<T> &Vector<T>::operator=(const Vector<T> &V)
 {

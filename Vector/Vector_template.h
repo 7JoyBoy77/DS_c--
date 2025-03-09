@@ -13,7 +13,7 @@ private:
     T *_elem; // 规模,容量，数据区
 
 protected:
-    // 这是基于“复制”的Vector Constructor
+    // 这是基于“复制”的Vector Constructor  C++无法传递一个数组，本质上传一个指针
     void copyFrom(T *const A, Rank lo, Rank hi);
     // 扩容
     void expand();
