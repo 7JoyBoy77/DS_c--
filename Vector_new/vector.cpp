@@ -21,7 +21,7 @@ void Vector<T>::expand()
 template <typename T>
 Vector<T>::Vector(unsigned cap = DEFAULT_CAPACITY)
 {
-    size = 0;
+    _size = 0;
     capacity = cap;
     _elem = new T[capacity];
 }
@@ -47,7 +47,7 @@ void Vector<T>::expand()
     {
         _elem[i] = old_elem[i];
     }
-    delete[] _elem;
+    delete[] old_elem;
 }
 
 template <typename T>
@@ -159,7 +159,10 @@ int Vector<T>::isorder()
     int flagNum = 0;
     for (int i = 0; i < (_size - 1); i++)
     {
-        (_elem[i] > _elem[i + 1]) ? flagNum++ : ;
+        if (_elem[i] > _elem[i + 1])
+        {
+            flagNum++;
+        }
     }
     return flagNum;
 }

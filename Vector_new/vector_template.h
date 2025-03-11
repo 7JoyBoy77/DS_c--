@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Sort.h"
 #define DEFAULT_CAPACITY 3
 typedef int Rank;
 template <typename T>
@@ -22,7 +23,7 @@ public:
     Vector(const Vector<T> &vec);
     // 基于内置数组的构造
     Vector(T *const A, Rank lo, Rank hi);
-    ~Vector() { delete[] _elem };
+    ~Vector() { delete[] _elem; }
     // 查找
     Rank find(const T &);
     Rank find(const T &, Rank, Rank);
