@@ -19,7 +19,7 @@ public:
     }
 
     // 接口
-    //前插入
+    // 前插入
     ListNodePosi(T) insertAsPred(T const &e);
     // 后插人
     ListNodePosi(T) insertAsSucc(T const &e);
@@ -27,7 +27,7 @@ public:
 template <typename T>
 ListNodePosi(T) ListNode<T>::insertAsPred(T const &e)
 {
-    ListNode<T> x = new ListNode(e, this->pred, this);
+    ListNodePosi(T) x = new ListNode(e, this->pred, this);
     // pred->succ = x;
     // 注意节点链接顺序
     this->pred->succ = x;
@@ -38,7 +38,7 @@ ListNodePosi(T) ListNode<T>::insertAsPred(T const &e)
 template <typename T>
 ListNodePosi(T) ListNode<T>::insertAsSucc(T const &e)
 {
-    ListNode<T> x = new ListNode(e, this, this->succ);
+    ListNode(T) x = new ListNode(e, this, this->succ);
     this->succ->pred = x;
     this->succ = x;
 }
