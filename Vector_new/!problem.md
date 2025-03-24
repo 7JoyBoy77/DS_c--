@@ -61,6 +61,7 @@ void Vector<T>::insert(const T &e, Rank r)
 ```
     int* dynamicArray = new int[size];
 ```
-- [ ] 不能用for-range遍历new出的动态数组
+- [x] 不能用for-range遍历new出的动态数组
+>forrange无法通过头元素指针确定迭代范围
 - [ ] 函数对象和函数指针机制
 - [ ] 将事物的逻辑转化为代码需要遵循"分解问题 → 抽象步骤 → 代码实现"的过程。

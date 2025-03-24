@@ -30,6 +30,7 @@ protected:
 
 public:
     List() { init() };
+    ~List();
     List(ListNode *h, ListNode *t, int s) : header(h), trailer(t), _size(s) {}
     // 返回创建的新节点
     ListNode<T> *insertFront(const T &data);
@@ -44,6 +45,7 @@ public:
     void remove(ListNode<T> *p);
     // 析构函数
     // clear()删除每一个节点
+    void clear()
     // unique
     // 借助函数指针机制遍历
 };

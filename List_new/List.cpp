@@ -35,6 +35,14 @@ ListNode<T> *ListNode<T>::insertSuc(const T &data)
 }
 
 template <typename T>
+List<T>::~List()
+{
+    clear();
+    delete header;
+    delete trailer;
+}
+
+template <typename T>
 ListNode<T> *List<T>::insertFront(const T &data)
 {
     // ListNode<T> *ptr = new ListNode<T>(data, this->header, this->header->suc);
@@ -92,13 +100,23 @@ List<T> List<T>::copyNodes(ListNode<T> *lo, unsigned int nums)
         lt.insertLast(lo->data);
         lo = lo->suc;
     }
+    return lt;
 }
-
 template <typename T>
 void List<T>::remove(ListNode<T> *p)
 {
     p->pre->suc = p->suc;
     p->suc->pre = p->pre;
-    this->_size--;
     delete p;
+    this->_size--;
+}
+
+template <typename T>
+void List<T>::clear()
+{
+    // 头指针后继非尾指针时可删
+    while (header->suc != trailer)
+    {
+        remove(header->suc);
+    }
 }
