@@ -45,7 +45,9 @@ public:
     void remove(ListNode<T> *p);
     // 析构函数
     // clear()删除每一个节点
-    void clear()
+    void clear();
     // unique
+    void unique();
     // 借助函数指针机制遍历
+    void traverse(void (*visit)(T &));
 };

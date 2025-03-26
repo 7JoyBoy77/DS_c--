@@ -10,8 +10,8 @@ void List<T>::init()
     trailer->pre = header;
     trailer->suc = nullptr;
 }
-template <typename T>
 // P节点调用
+template <typename T>
 ListNode<T> *ListNode<T>::insertPre(const T &data)
 {
     // ListNode *x(data,this.pre, this);
@@ -102,6 +102,7 @@ List<T> List<T>::copyNodes(ListNode<T> *lo, unsigned int nums)
     }
     return lt;
 }
+
 template <typename T>
 void List<T>::remove(ListNode<T> *p)
 {
@@ -118,5 +119,29 @@ void List<T>::clear()
     while (header->suc != trailer)
     {
         remove(header->suc);
+    }
+}
+
+template <typename T>
+void List<T>::unique()
+{
+    // 未重载 =
+    ListNode<T> *ptr = header;
+    while ((ptr = ptr->suc) != trailer)
+    {
+        ListNode<T> *p = find(ptr->data, ptr->suc, _size - 1);
+        if (p != nullptr)
+        {
+            remove(p);
+        }
+    }
+}
+
+template <typename T>
+void List<T>::traverse(void (*visit)(T &))
+{
+    for (ListNode<T> *p = header->succ; p != trailer; p = p->succ)
+    {
+        visit(p->data);
     }
 }
