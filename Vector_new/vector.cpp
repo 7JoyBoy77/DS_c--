@@ -14,11 +14,6 @@ void Vector<T>::copy(T *const A, Rank lo, Rank hi)
 }
 
 template <typename T>
-void Vector<T>::expand()
-{
-}
-
-template <typename T>
 Vector<T>::Vector(unsigned cap = DEFAULT_CAPACITY)
 {
     _size = 0;
