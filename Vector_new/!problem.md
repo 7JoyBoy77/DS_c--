@@ -65,3 +65,29 @@ void Vector<T>::insert(const T &e, Rank r)
 >forrange无法通过头元素指针确定迭代范围
 - [ ] 函数对象和函数指针机制
 - [ ] 将事物的逻辑转化为代码需要遵循"分解问题 → 抽象步骤 → 代码实现"的过程。
+```
+    template <typename VST>
+    void traverse(VST& visit) {
+        for (int i = 0; i < _size; i++) {
+            visit(_elem[i]);
+        }
+    }
+};
+
+// 操作器：打印元素
+struct PrintVisitor {
+    template <typename T>
+    void operator()(const T& value) {
+        std::cout << value << " ";
+    }
+};
+
+int main() {
+    Vector<int> vec(5);
+    PrintVisitor visitor;
+    vec.traverse(visitor);
+    std::cout << std::endl;
+    return 0;
+}
+```
+- [ ] 这个示例中，PrintVisitor 是一个操作器，它重载了 () 运算符，用于打印传入的元素。在 main 函数中，创建了一个 Vector<int> 对象 vec，并调用 traverse 函数，传入 PrintVisitor 对象 visitor，从而实现对 Vector 中所有元素的打印操作

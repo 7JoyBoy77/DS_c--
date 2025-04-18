@@ -1,34 +1,48 @@
-#define IsRoot(x) (!(x).parent)
-#define IsLeft(x) ()
-#define IsRight(x) ()
-
-enum class RBColor
-{
-    RB_RED = 0,
-    RB_BLACK = 1
-};
+#include "node.h"
 
 template <typename T>
-class BinNode
+class BinTree
 {
+protected:
+    int _size;
+    BinNode<T> *_root;
+    virtual int updateHeight(BinNode<T> *x);
+    void updateHeightAbove(BinNode<T> *x);
+    /**
+     * @brief 释放当前树资源，不包括节点
+     * @note Bintree通过new出来动态管理内存，需要delete释放
+     */
+    void release(BinTree<T> *&tree);
+    // 二叉树高度如何弄
+    // 每插入一个新节点，更新祖先节点
 public:
-    BinNode();
-    BinNode(T e, BinNode<T> *p = nullptr, BinNode<T> *l = nullptr, BinNode<T> *r = nullptr, int h = 0, int l = 1, RBColor c = RB_RED);
+    BinTree() : _size(0), root(nullptr) {};
+    // 析构
+    int size() const { retrun _size };
+    // 判空
+    bool isEmpty() const { return !_root; }
+    // 返回根节点
+    BinNode<T> *root() { return _root; }
+    // 插入根节点
+    BinNode<T> *insertRoot(const T &e);
+    // 插入一个左孩子给节点x
+    BinNode<T> *insertAsLeft(BinNode<T> *x, const T &e);
+    // 插入一个右孩子给节点x
+    BinNode<T> *insertAsRight(BinNode<T> *x, const T &e);
+    /**
+     * @brief 插入一个子树给X节点
+     * @return 返回子树根节点
+     */
+    BinNode<T> *attachAsLeft(BinNode<T> *x, BinTree<T> *&S);
+    // 插入一个右子树给节点x
+    BinNode<T> *attachAsRight(BinNode<T> *x, BinTree<T> *&S);
+    // 删除以x节点为N的子树
 
-    ~BinNode();
-    int size();
-    int heightTree();
-    BinNode<T> *insertAsLeft(const T &);
-    BinNode<T> *insertAsRight(const T &);
+    // 子树分离
 
-    // 树的遍历
-    // 节点的比较器，判等器
-private:
-    T data;
-    int height;
-    int npl; // 左式堆是什么
-    BinNode<T> *parent;
-    BinNode<T> *left;
-    BinNode<T> *right;
-    RBColor color;
+    // 层次遍历
+
+    // 先序遍历 根 左 右
+    // 中序遍历 左 根 右
+    // 后序遍历 左 右 根
 };
