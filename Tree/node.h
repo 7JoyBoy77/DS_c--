@@ -2,10 +2,15 @@
 #define _NODE_H_
 
 #define IsRoot(x) (!(x).parent)
-#define IsLeft(x) ()
+#define IsLeft(x) ((!IsRoot(x)) && (&(x) == (x).parent->left))
 #define IsRight(x) ()
 
 #define stature(p) ((p) ? (p)->height : -1)
+/**
+ * @brief 返回父节点关于当前节点的指针
+ *
+ */
+#define fromParent(x) (IsRoot(x) ? _root : (IsLeft(x) ? (x).parent->left : (x).parent->right))
 enum class RBColor
 {
     RB_RED = 0,

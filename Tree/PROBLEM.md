@@ -18,7 +18,12 @@ BinTree<int>* subTree = new BinTree<int>(); // 堆上创建子树
 root->attachAsLC(subTree); // 接入子树
 ```
 - [ ] 根据实际树的情况思考，就像是List和ListNode的区别  
-- [ ] tree的release需要从树的构造开始考虑
+- [ ] tree的release需要从树的构造开始考虑,node的release
 - [ ] 尾递归优化消除 尾递归的核心是递归调用后无额外计算或操作 利用stack 模拟递归调用栈
 
 - [ ] 完全二叉树和满二叉树 PFC解码和编码 huffman编码
+- [ ] 使用. 和 *（）. 和 ->
+- [ ] 如何理解树的递归性质
+- [ ] 消除尾递归是什么
+- [ ] VST体现了策略模式的思想 
+- [ ] 函数指针类型模版 ` using VisitFuncPtr = void (*)(T)`

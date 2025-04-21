@@ -1,5 +1,5 @@
 #include "node.h"
-
+#include "../Stack_new/stack.h"
 template <typename T>
 class BinTree
 {
@@ -37,12 +37,22 @@ public:
     // 插入一个右子树给节点x
     BinNode<T> *attachAsRight(BinNode<T> *x, BinTree<T> *&S);
     // 删除以x节点为N的子树
-
+    int remove(BinNode<T> *bn);
+    static int removeAt(BinNode<T> *bn);
     // 子树分离
-
+    BinTree<T> *secede(BinNode<T> *bn);
     // 层次遍历
 
     // 先序遍历 根 左 右
+    template <typename VST>
+    void traversePre(BinNode<T> *bn, VST &visit);
+    // 迭代版先序遍历
+    template <typename VST>
+    static void visitLeftBranch(BinNode<T> *bn, VST &visit, Stack<BinNode<T> *> &S);
+    template <typename VST>
+    void traversePre_I2(BinNode<T> *bn, VST &visit);
     // 中序遍历 左 根 右
+    // 迭代版中序遍历
+
     // 后序遍历 左 右 根
 };
