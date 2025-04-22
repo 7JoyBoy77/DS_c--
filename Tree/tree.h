@@ -51,8 +51,18 @@ public:
     static void visitLeftBranch(BinNode<T> *bn, VST &visit, Stack<BinNode<T> *> &S);
     template <typename VST>
     void traversePre_I2(BinNode<T> *bn, VST &visit);
+
     // 中序遍历 左 根 右
+    template <typename VST>
+    void traverseIn(BinNode<T> *bn, VST &visit);
     // 迭代版中序遍历
+    template <typename VST>
+    static void goLeftBranch(BinNode<T> *bn, VST &visit, Stack<BinNode<T> *> &S);
+    template <typename VST>
+    void traversePre_I1(BinNode<T> *bn, VST &visit);
 
     // 后序遍历 左 右 根
+    template <typename VST>
+    void traverse(BinNode<T> *bn, VST &visit);
+    // 迭代版后序遍历
 };

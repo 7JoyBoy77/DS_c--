@@ -134,3 +134,41 @@ void BinTree<T>::traversePre_I2(BinNode<T> *bn, VST &visit)
         x = S.pop();
     }
 }
+template <typename T>
+template <typename VST>
+void BinTree<T>::traverseIn(BinNode<T> *bn, VST &visit)
+{
+    if (!bn)
+    {
+        return;
+    }
+    traversePre(bn->left);
+    visit(bn->data);
+    traversePre(bn->right);
+}
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::goLeftBranch(BinNode<T> *bn, VST &visit, Stack<BinNode<T> *> &S)
+{
+    while (bn)
+    {
+        S.push(bn->right);
+        bn = bn->left;
+    }
+}
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::traversePre_I1(BinNode<T> *bn, VST &visit)
+{
+    Stack<BinNode<T> *> S;
+    while (true)
+    {
+        goLeftBranch(bn, visit, S);
+        // if(S.empty()) break;
+        bn = S.pop();
+        visit(data);
+        bn = bn->right;
+    }
+}
