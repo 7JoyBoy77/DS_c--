@@ -65,4 +65,7 @@ public:
     template <typename VST>
     void traverse(BinNode<T> *bn, VST &visit);
     // 迭代版后序遍历
+
+    // 层次遍历
+    void traverseLevel();
 };

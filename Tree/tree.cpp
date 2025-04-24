@@ -172,3 +172,17 @@ void BinTree<T>::traversePre_I1(BinNode<T> *bn, VST &visit)
         bn = bn->right;
     }
 }
+
+template <typename T>
+void BinTree<T>::traverseLevel()
+{
+    quque<BinNode<T> *> Q{};
+    Q.push(t);
+    while (!Q.empty())
+    {
+        BinNode<T> *bn = Q.pop();
+        visit(bn);
+        // 从左右孩子开始继续遍历
+        //
+    }
+}
