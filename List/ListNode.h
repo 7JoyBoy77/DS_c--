@@ -13,7 +13,7 @@ public:
     ListNodePosi(T) succ;
 
     //  构造器
-    ListNode() {}
+    ListNode() : data(), pred(nullptr), succ(nullptr) {}
     ListNode(T e, ListNodePosi(T) p = nullptr, ListNodePosi(T) s = nullptr) : data(e), pred(p), succ(s)
     {
     }
