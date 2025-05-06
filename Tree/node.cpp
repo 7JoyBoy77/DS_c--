@@ -13,7 +13,7 @@ BinNode<T>::BinNode()
 }
 
 template <typename T>
-BinNode<T>::BinNode(T e, BinNode<T> *p = nullptr, BinNode<T> *lc = nullptr, BinNode<T> *rc = nullptr, int h = 0, int l = 1, RBColor c = RB_RED) :
+BinNode<T>::BinNode(T e, BinNode<T> *p = nullptr, BinNode<T> *lc = nullptr, BinNode<T> *rc = nullptr, int h = 0, int l = 1, RBColor c = RBColor::RB_RED) :
 {
     this->data = e;
     this->parent = p;
