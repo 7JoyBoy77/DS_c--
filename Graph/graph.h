@@ -1,13 +1,17 @@
 #pragma once
-
+#include <limits>
 using VStatus = enum { UNDISCOVERED,
                        DISCOVERED,
                        VISITED }; // 顶点状态
+                                  /**
+                                   * @brief 边在遍历树中所属的类型
+                                   *
+                                   */
 using EType = enum { UNDETERMINED,
                      TREE,
                      CROSS,
                      FORWARD,
-                     BACKWARD }; // 边在遍历树中所属的类型
+                     BACKWARD };
 
 template <typename Tv, typename Te> // 顶点类型、边类型
 class Graph
@@ -32,23 +36,30 @@ private:
     bool TSort(Rank, Rank &, Stack<Tv> *); // （连通域）基于DFS的拓扑排序算法
     template <typename PU>
     void PFS(Rank, PU); // （连通域）优先级搜索框架
+protected:
+    int n; // 顶点
+    int e; // 边：这里约定，无向边均统一转化为方向互逆的一对有向边，从而将无向图视作有向图的特例
+    // 边总数
 public:
-    // 顶点
-    int n;                                // 顶点总数
-    virtual Rank insert(Tv const &) = 0;  // 插入顶点，返回编号
-    virtual Tv remove(Rank) = 0;          // 删除顶点及其关联边，返回该顶点信息
-    virtual Tv &vertex(Rank) = 0;         // 顶点的数据（该顶点的确存在）
-    virtual Rank inDegree(Rank) = 0;      // 顶点的入度（该顶点的确存在）
-    virtual Rank outDegree(Rank) = 0;     // 顶点的出度（该顶点的确存在）
-    virtual Rank firstNbr(Rank) = 0;      // 顶点的首个邻接顶点
-    virtual Rank nextNbr(Rank, Rank) = 0; // 顶点（相对当前邻居的）下一邻居
-    virtual VStatus &status(Rank) = 0;    // 顶点的状态
-    virtual Rank &dTime(Rank) = 0;        // 顶点的时间标签dTime
-    virtual Rank &fTime(Rank) = 0;        // 顶点的时间标签fTime
-    virtual Rank &parent(Rank) = 0;       // 顶点在遍历树中的父亲
-    virtual int &priority(Rank) = 0;      // 顶点在遍历树中的优先级数
-    // 边：这里约定，无向边均统一转化为方向互逆的一对有向边，从而将无向图视作有向图的特例
-    int e;                                                // 边总数
+    virtual Rank insert(Tv const &) = 0; // 插入顶点，返回编号
+    virtual Tv remove(Rank) = 0;         // 删除顶点及其关联边，返回该顶点信息
+    virtual Tv &vertex(Rank) = 0;        // 顶点的数据（该顶点的确存在）
+    virtual Rank inDegree(Rank) = 0;     // 顶点的入度（该顶点的确存在）
+    virtual Rank outDegree(Rank) = 0;    // 顶点的出度（该顶点的确存在）
+    /**
+     * @brief 查找首个邻接节点
+     *
+     * @return Rank
+     */
+    virtual Rank firstNbr(Rank) = 0;
+
+    virtual Rank nextNbr(Rank, Rank) = 0;
+    virtual VStatus &status(Rank) = 0; // 顶点的状态
+    virtual Rank &dTime(Rank) = 0;     // 顶点的时间标签dTime
+    virtual Rank &fTime(Rank) = 0;     // 顶点的时间标签fTime
+    virtual Rank &parent(Rank) = 0;    // 顶点在遍历树中的父亲
+    virtual int &priority(Rank) = 0;   // 顶点在遍历树中的优先级数
+
     virtual bool exists(Rank, Rank) = 0;                  // 边(v, u)是否存在
     virtual void insert(Te const &, int, Rank, Rank) = 0; // 在两个顶点之间插入指定权重的边
     virtual Te remove(Rank, Rank) = 0;                    // 删除一对顶点之间的边，返回该边信息
@@ -64,4 +75,27 @@ public:
     void dijkstra(Rank);    // 最短路径Dijkstra算法
     template <typename PU>
     void pfs(Rank, PU); // 优先级搜索框架
+};
+
+template <typename Tv>
+struct Vertex
+{
+    Tv data;
+    int inDegree, outDegree;
+    VStatus status;
+    // 时间标签
+    int dTime, fTime;
+    // 遍历树中的节点，优先级
+    int parent, priority;
+    Vertex(const Tv &d = (Tv)0);
+    ~Vertex();
+};
+template <typename Te>
+struct Edge
+{
+    Te data;
+    int weight;
+    EType type;
+    Edge(const Te &d, int w);
+    ~Edge();
 };
