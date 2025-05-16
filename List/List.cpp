@@ -6,8 +6,8 @@ class List
 {
 private:
     int _size;
-    ListNodePosi(T) header;  //头
-    ListNodePosi(T) trailer; //尾
+    ListNodePosi(T) header;  // 头
+    ListNodePosi(T) trailer; // 尾
 
 protected:
     void init();
@@ -43,8 +43,8 @@ template <typename T>
 void List<T>::init()
 {
     _size = 0;
-    header = new ListNode<T>;
-    trailer = new ListNode<T>;
+    header = new ListNode<T>();
+    trailer = new ListNode<T>();
     header->pred = nullptr, header->succ = trailer;
     trailer->pred = header, trailer->succ = nullptr;
 }
@@ -70,7 +70,7 @@ ListNodePosi(T) List<T>::find(const T &e, int n)
 template <typename T>
 ListNodePosi(T) List<T>::find(const T &e, int n, ListNodePosi(T) p)
 {
-    while (n-- >= 0 )
+    while (n-- >= 0)
     {
         p = p->pred;
         if (e = p.data)
@@ -156,7 +156,7 @@ int List<T>::deduplicate()
     {
         return 0;
     }
-    
+
     int old_size = _size;
     ListNodePosi(T) p = header->succ;
     Rank r = 1;
@@ -168,6 +168,3 @@ int List<T>::deduplicate()
     }
     return old_size - _size;
 }
-
-
-    

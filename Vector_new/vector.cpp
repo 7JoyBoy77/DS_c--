@@ -86,6 +86,7 @@ Rank Vector<T>::find(const T &e, Rank lo, Rank hi)
 template <typename T>
 void Vector<T>::insert(const T &e, Rank r)
 {
+    // ÊÇ·ñÀ©ÈÝ
     for (int i = _size; i > r; i--)
     {
         _elem[i] = _elem[i - 1];
