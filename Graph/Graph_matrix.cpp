@@ -21,21 +21,21 @@ public:
     };
     // 析构如何析构
     ~GraphMatrix();
-    virtual Tv &vertex(Rank i) override { return V[i].data; }
-    virtual Rank inDegree(Rank i) override { return V[i].inDegree; }
-    virtual Rank outDegree(Rank i) override { return V[i].outDegree; }
-    virtual VStatus &status(Rank i) override { return V[i].status; }
+    Tv &vertex(Rank i) override { return V[i].data; }
+    Rank inDegree(Rank i) override { return V[i].inDegree; }
+    Rank outDegree(Rank i) override { return V[i].outDegree; }
+    VStatus &status(Rank i) override { return V[i].status; }
 
-    virtual bool exists(Rank i, Rank j)
+    bool exists(Rank i, Rank j) override
     {
         return (i < n) && (i >= 0) && (j < n) && (j >= 0) && (E[i][j] != nullptr);
     }
 
     // 顶点动态操作
-    virtual Tv remove(Rank i)
+    Tv remove(Rank i) override
     {
     }
-    virtual Rank insert(const Tv &v)
+    Rank insert(const Tv &v) override
     {
     }
     // 边的动态操作
