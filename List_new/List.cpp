@@ -22,6 +22,7 @@ ListNode<T> *ListNode<T>::insertPre(const T &data)
     this.pre = x;
     return n;
 }
+
 // 有头尾指针插入节点方法一般化，不然空插入一个节点，
 // this指的是要创建的对象 new初始化也要相应修改
 // 还是要一个头记录，不然不行，new出来的新节点，前驱后继只能没有了

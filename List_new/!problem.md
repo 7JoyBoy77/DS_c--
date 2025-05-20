@@ -19,4 +19,5 @@
 6 {  for ( ListNodePosi(T) p = header->succ; p != trailer; p = p->succ ) visit ( p->data );  }
 ```
 - [ ] List 和vector 梳理过后再回看
+- [ ] 一定回看链表问题
 - [ ] C++ RALL是什么

@@ -8,7 +8,7 @@
 #define stature(p) ((p) ? (p)->height : -1)
 /**
  * @brief 返回父节点关于当前节点的指针
- *
+ * @param
  */
 #define fromParent(x) (IsRoot(x) ? _root : (IsLeft(x) ? (x).parent->left : (x).parent->right))
 enum class RBColor
