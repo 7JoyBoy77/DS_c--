@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Sort.h"
 #define DEFAULT_CAPACITY 3
@@ -29,6 +30,7 @@ public:
     // ²éÕÒ
     Rank find(const T &);
     Rank find(const T &, Rank, Rank);
+    int size() { return this->_size; }
     // ÖÃÂÒÆ÷
     // ²åÈë
     void insert(const T &t) { insert(t, _size); }

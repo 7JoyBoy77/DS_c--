@@ -17,7 +17,7 @@ template <typename T>
 Vector<T>::Vector(unsigned cap = DEFAULT_CAPACITY)
 {
     _size = 0;
-    capacity = cap;
+    this->capacity = cap;
     _elem = new T[capacity];
 }
 
