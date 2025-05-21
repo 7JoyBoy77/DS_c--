@@ -20,7 +20,7 @@ public:
         this->e = 0
     };
     // 析构如何析构
-    ~GraphMatrix();
+    ~GraphMatrix() override;
     Tv &vertex(Rank i) override { return V[i].data; }
     Rank inDegree(Rank i) override { return V[i].inDegree; }
     Rank outDegree(Rank i) override { return V[i].outDegree; }

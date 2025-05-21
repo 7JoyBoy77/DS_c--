@@ -41,6 +41,8 @@ protected:
     int e; // 边：这里约定，无向边均统一转化为方向互逆的一对有向边，从而将无向图视作有向图的特例
     // 边总数
 public:
+    Graph() = default;
+    virtual ~Graph() = default;
     virtual Rank insert(Tv const &) = 0; // 插入顶点，返回编号
     virtual Tv remove(Rank) = 0;         // 删除顶点及其关联边，返回该顶点信息
     virtual Tv &vertex(Rank) = 0;        // 顶点的数据（该顶点的确存在）
