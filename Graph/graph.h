@@ -1,4 +1,5 @@
 #pragma once
+#include "../Queue/queue.h"
 #include <limits>
 using VStatus = enum { UNDISCOVERED,
                        DISCOVERED,
@@ -30,7 +31,7 @@ private:
                     type(v, u) = UNDETERMINED; // 类型
         }
     }
-    void BFS(Rank, Rank &);                // （连通域）广度优先搜索算法
+    void BFS(int, int &);                  // （连通域）广度优先搜索算法
     void DFS(Rank, Rank &);                // （连通域）深度优先搜索算法
     void BCC(Rank, Rank &, Stack<Rank> &); // （连通域）基于DFS的双连通分量分解算法
     bool TSort(Rank, Rank &, Stack<Tv> *); // （连通域）基于DFS的拓扑排序算法
@@ -50,12 +51,20 @@ public:
     virtual Rank outDegree(Rank) = 0;    // 顶点的出度（该顶点的确存在）
     /**
      * @brief 查找首个邻接节点
-     *
+     * @note 邻接节点怎么计算的，怎么判定的，如何去找到
      * @return Rank
      */
     virtual Rank firstNbr(Rank) = 0;
-
+    /**
+     * @brief 查找顶点 i 的邻接表中，索引小于 j 的最后一个邻接顶点
+     *
+     * @return Rank
+     */
     virtual Rank nextNbr(Rank, Rank) = 0;
+    /**
+     *
+     * @return VStatus& 引用传递修改值
+     */
     virtual VStatus &status(Rank) = 0; // 顶点的状态
     virtual Rank &dTime(Rank) = 0;     // 顶点的时间标签dTime
     virtual Rank &fTime(Rank) = 0;     // 顶点的时间标签fTime

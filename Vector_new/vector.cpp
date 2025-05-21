@@ -17,7 +17,7 @@ template <typename T>
 Vector<T>::Vector(unsigned cap = DEFAULT_CAPACITY)
 {
     _size = 0;
-    capacity = cap;
+    this->capacity = cap;
     _elem = new T[capacity];
 }
 
@@ -33,6 +33,17 @@ Vector<T>::Vector(T *const A, Rank lo, Rank hi)
     copy(A, lo, hi);
 }
 
+template <typename T>
+Vector<T>::Vector(int c, int num, T t)
+{
+    this->capacity = c;
+    this->_elem = new T[capacity];
+    this->_size = num;
+    for (int i = 0; i < _size; i++)
+    {
+        _elem[i] = t;
+    }
+}
 template <typename T>
 void Vector<T>::expand()
 {
@@ -114,6 +125,13 @@ void Vector<T>::erase(Rank lo, Rank hi)
         _elem[lo++] = _elem[hi++];
     }
     _size = lo;
+}
+template <typename T>
+T Vector<T>::remove(Rank i)
+{
+    T temp = _elem[i];
+    erase(i);
+    return temp;
 }
 
 template <typename T>
