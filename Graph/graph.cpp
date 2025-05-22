@@ -1,3 +1,4 @@
+#pragma once
 #include "graph.h"
 template <typename Tv>
 Vertex<Tv>::Vertex(const Tv &d = (Tv)0)

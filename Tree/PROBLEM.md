@@ -46,3 +46,51 @@ root->attachAsLC(subTree); // 接入子树
 ```
 ### 在先序遍历从递归转换为迭代的过程中，模拟左子树优先遍历的逻辑主要通过 ** 栈（Stack）** 来实现，核心思想是利用栈保存后续需要访问的右子树节点，从而优先处理左子树 其本质是通过系统栈隐式保存遍历路径：处理完当前节点后，先进入左子树递归，右子树的处理被 “暂存” 在递归栈中，待左子树处理完毕后再执行###
 ### 栈的使用好像就是如此 ， 实际应用场景可以用栈解决###
+
+- [ ] new 类对象时，内存分配 内存对齐机制
+```
+sizeof(*obj) 测量的是 obj 指针所指向的对象（即 Mem 类的实例）的大小。
+Mem 类包含一个 double（通常 8 字节）和一个 int（通常 4 字节）。
+由于内存对齐要求（假设按 8 字节对齐），int 后面会填充 4 字节，因此 Mem 的总大小为 16 字节
+sizeof(obj) 测量的是指针本身的大小。
+在 32 位系统上，指针大小为 4 字节；在 64 位系统上，指针大小为 8 字节。
+因此，输出通常为 8 字节（假设你使用的是 64 位系统）
+class Mem
+{
+private:
+    double a;
+    int b;
+};
+int main()
+{
+    Mem *obj = new Mem();
+    std::cout << sizeof(*(obj)) << std::endl;
+    return 0;
+}
+```
+
+- [ ] 节点高度更新算法
+
+- [ ] 
+```
+当前代码中，remove 函数已经通过 fromParent(*bn) = nullptr 将父节点指向该节点的指针（左或右子节点）置空，避免了父节点的子指针成为悬空指针。但外部用户持有的节点指针（如用户自己保存的 BinNode<T>* 变量）未被处理，这部分需要额外处理。
+
+template <typename T>
+BinNode<T> *BinNode<T>::insertAsLeft(const T &e)
+{
+    BinNode<T> *bn = new BinNode(e, this);
+    this->left = bn;
+    return bn;
+}
+int BinTree<T>::removeAt(BinNode<T> *bn)
+{
+    if (!bn)
+    {
+        return 0;
+    }
+    int n = 1 + removeAt(bn->left) + removeAt(bn->right);
+    delete bn;
+    return n;
+    // release(bn.data); release(bn); return n;
+}
+```

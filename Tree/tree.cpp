@@ -2,13 +2,17 @@
 template <typename T>
 BinNode<T> *BinTree<T>::insertRoot(const T &e)
 {
+    _size = 1;
     BinNode<T> *bn = new BinNode(e);
+    this->_root = bn;
     return bn;
 }
+
 template <typename T>
 void BinTree<T>::release(BinTree<T> *&tree)
 {
 }
+
 template <typename T>
 int BinTree<T>::updateHeight(BinNode<T> *x)
 {
@@ -46,7 +50,7 @@ BinNode<T> *BinTree<T>::insertAsRight(BinNode<T> *x, const T &e)
 template <typename T>
 BinNode<T> *BinTree<T>::attachAsLeft(BinNode<T> *x, BinTree<T> *&S)
 {
-    if (x->left = S->_root)
+    if ((x->left = S->_root) != nullptr)
     {
         S->_root->parent = x;
     }
@@ -69,8 +73,10 @@ BinNode<T> *BinTree<T>::attachAsLeft(BinNode<T> *x, BinTree<T> *&S)
 template <typename T>
 int BinTree<T>::remove(BinNode<T> *bn)
 {
+    // 避免父节点指向bn的指针成为悬空指针
     fromParent(*bn) = nullptr;
     updateHeightAbove(bn->parent);
+
     int n = removeAt(bn);
     this->_size -= n;
     return n;
@@ -81,10 +87,11 @@ int BinTree<T>::removeAt(BinNode<T> *bn)
 {
     if (!bn)
     {
-        retrun 0;
+        return 0;
     }
     int n = 1 + removeAt(bn->left) + removeAt(bn->right);
-    // release(bn.data); release(bn); return n;
+    delete bn;
+    return n;
 }
 
 template <typename T>
@@ -176,7 +183,7 @@ void BinTree<T>::traversePre_I1(BinNode<T> *bn, VST &visit)
 template <typename T>
 void BinTree<T>::traverseLevel()
 {
-    quque<BinNode<T> *> Q{};
+    queue<BinNode<T> *> Q{};
     Q.push(t);
     while (!Q.empty())
     {

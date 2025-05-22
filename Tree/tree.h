@@ -18,7 +18,7 @@ protected:
 public:
     BinTree() : _size(0), root(nullptr) {};
     // 析构
-    int size() const { retrun _size };
+    int size() const { return _size };
     // 判空
     bool isEmpty() const { return !_root; }
     // 返回根节点
