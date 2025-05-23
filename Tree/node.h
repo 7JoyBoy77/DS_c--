@@ -24,6 +24,7 @@ public:
     BinNode();
     BinNode(T e, BinNode<T> *p = nullptr, BinNode<T> *lc = nullptr, BinNode<T> *rc = nullptr, int h = 0, int l = 1, RBColor c = RBColor::RB_RED);
     ~BinNode();
+    // 统计当前节点的后代总数
     int size();
     // 节点自身很难发现后代的变化，因此这里不妨反过来采用另一处理策略：一旦有节点加入或离开二叉树，则更新其所有祖先的高度。
     BinNode<T> *insertAsLeft(const T &);
@@ -66,6 +67,22 @@ BinNode<T>::BinNode(T e, BinNode<T> *p, BinNode<T> *lc, BinNode<T> *rc, int h, i
     this->height = h;
     this->npl = l;
     this->color = c;
+}
+
+// 二叉树递归的性质运用的很多
+template <typename T>
+int BinNode<T>::size()
+{
+    int sum = 1;
+    if (this->left)
+    {
+        sum += this->left->size();
+    }
+    if (this->right)
+    {
+        sum += this->right->size();
+    }
+    return sum;
 }
 
 template <typename T>
