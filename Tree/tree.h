@@ -25,6 +25,7 @@ protected:
 public:
     BinTree() : _size(0), root(nullptr) {};
     // 析构
+    ~BinTree();
     int size() const { return _size };
     // 判空
     bool isEmpty() const { return !_root; }
@@ -45,6 +46,7 @@ public:
     BinNode<T> *attachAsRight(BinNode<T> *x, BinTree<T> *&S);
     // 删除以x节点为N的子树
     int remove(BinNode<T> *bn);
+    // 此处removeAt是静态函数，为什么要这么做
     static int removeAt(BinNode<T> *bn);
     // 子树分离
     BinTree<T> *secede(BinNode<T> *bn);
@@ -86,12 +88,16 @@ BinNode<T> *BinTree<T>::insertRoot(const T &e)
     return bn;
 }
 
-/*
 template <typename T>
-void BinTree<T>::release(BinTree<T> *&tree)
+BinTree<T>::~BinTree()
 {
+    if (_root)
+    {
+        BinTree<T>::removeAt(_root);
+        _root = nullptr;
+        _size = 0;
+    }
 }
-*/
 
 template <typename T>
 int BinTree<T>::updateHeight(BinNode<T> *x)
@@ -140,7 +146,6 @@ BinNode<T> *BinTree<T>::attachAsLeft(BinNode<T> *x, BinTree<T> *&S)
     S->_root = nullptr;
     S->_size = 0;
     // release(S);
-    // delete S;
     S = nullptr;
     return x->left;
     // 释放树之后，节点不会被释放，只不过，链接过来的S树的节点，被现在的树控制。
