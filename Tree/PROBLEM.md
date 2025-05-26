@@ -123,3 +123,6 @@ int BinTree<T>::removeAt(BinNode<T> *bn)
     // release(bn.data); release(bn); return n;
 }
 ```
+
+- [ ] 递归可以用数学归纳法完全证明
+- [ ] 递归确实很容易看出来逻辑，但是如何转换迭代需要思考    

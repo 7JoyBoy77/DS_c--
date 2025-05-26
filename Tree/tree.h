@@ -68,6 +68,8 @@ public:
     template <typename VST>
     void traversePre_I1(BinNode<T> *bn, VST &visit);
 
+    template <typename VST>
+    void traverseIn_loop(BinNode<T> *bn, VST &visit);
     // 后序遍历 左 右 根
     template <typename VST>
     void traverse(BinNode<T> *bn, VST &visit);
@@ -225,7 +227,7 @@ void BinTree<T>::traversePre_I2(BinNode<T> *bn, VST &visit)
         // 每个子树都要遍历一次
         visitLeftBranch(bn, visit, S);
         // if (S.empty) {break;}
-        x = S.pop();
+        bn = S.pop();
     }
 }
 
@@ -252,7 +254,12 @@ void BinTree<T>::goLeftBranch(BinNode<T> *bn, VST &visit, Stack<BinNode<T> *> &S
         bn = bn->left;
     }
 }
-
+/*
+先序遍历 由于右树最后遍历所以尾递归的特性无序压栈，
+我们只需要将左子树的递归压入栈中 这里没问题
+在设计算法时，递归中 “先左后根” 的隐式路径，在迭代中通过 “压栈记录路径→弹出访问根→处理右子树” 显式模拟。
+栈保存了所有未访问的根节点，确保左子树完全遍历后才访问根。
+*/
 template <typename T>
 template <typename VST>
 void BinTree<T>::traversePre_I1(BinNode<T> *bn, VST &visit)
@@ -261,10 +268,36 @@ void BinTree<T>::traversePre_I1(BinNode<T> *bn, VST &visit)
     while (true)
     {
         goLeftBranch(bn, visit, S);
-        // if(S.empty()) break;
+        if (S.empty())
+            break;
         bn = S.pop();
-        visit(data);
+        visit(bn->data);
         bn = bn->right;
+    }
+}
+
+template <typename T>
+template <typename VST>
+void BinTree<T>::traverseIn_loop(BinNode<T> *bn, VST &visit)
+{
+    Stack<BinNode<T> *> S{};
+    while (true)
+    {
+        if (bn)
+        {
+            S.push(bn);
+            bn = bn->left;
+        }
+        else if (!S.empty())
+        {
+            bn = S.pop();
+            visit(bn->data);
+            bn = bn->right;
+        }
+        else
+        {
+            break;
+        }
     }
 }
 
