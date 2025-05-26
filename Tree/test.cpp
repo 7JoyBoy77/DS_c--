@@ -1,16 +1,11 @@
 #include "node.h"
 #include <iostream>
 #include <utility>
+#include <vector>
 
-class Mem
-{
-private:
-    double a;
-    int b;
-};
 int main()
 {
-    Mem *obj = new Mem();
-    std::cout << sizeof(*(obj)) << std::endl;
+    std::vector<int> vecStack = {1, 2, 3};
+    std::vector<int> *vecHeap = new std::vector<int>();
     return 0;
 }
