@@ -19,6 +19,54 @@ __C++ 主要通过 RAII（资源获取即初始化）机制 和 智能指针（Smart Pointers） 解决动
 `BinTree 类的成员变量 _root 是指向动态分配的 BinNode<T> 节点的指针（通过 new 创建，如 insertRoot 函数中 new BinNode(e)）。默认析构函数仅会销毁 _root 指针本身（栈上的指针变量），但不会释放 _root 指向的堆内存（即树中所有节点的内存）`
 - [ ] 此处通过释放传入树的空间与之前释放节点的空间思考 
 ` bn 在插入时被new出来分配到堆， 在删除相关节点时，需要释放其节点内存，需要delete，那么这里接入子树时，在释放原树BinTree<T> *的指针需要怎么做`
+`类的最好之处之一是它们包含析构函数，当类的对象超出作用域时，析构函数会自动执行。因此，如果在构造函数中分配（或获取）内存，则可以在析构函数中释放它，并确保在类对象被销毁时释放内存（无论它是否超出作用域、是否显式删除，等等…）。这是RAII编程范例的核心。`
+
+- [ ] 智能指针是一个组合类，旨在管理动态分配的内存，并确保当智能指针对象超出作用域时删除内存。
+```
+#include <iostream>
+
+template <typename T>
+class Auto_ptr1
+{
+	T* m_ptr {};
+public:
+	// 通过构造函数，“拥有”传递进来的指针
+	Auto_ptr1(T* ptr=nullptr)
+		:m_ptr(ptr)
+	{
+	}
+	
+	// 析构函数，确保拥有的指针被释放
+	~Auto_ptr1()
+	{
+		delete m_ptr;
+	}
+
+	// 重载 解引用 和 operator-> ，以便 Auto_ptr1 用起来和 m_ptr 姿势一样.
+	T& operator*() const { return *m_ptr; }
+	T* operator->() const { return m_ptr; }
+};
+
+// 样例class，用来证明上述的方案有效
+class Resource
+{
+public:
+    Resource() { std::cout << "Resource acquired\n"; }
+    ~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+int main()
+{
+	Auto_ptr1<Resource> res(new Resource()); // 注意这里动态分配了内存
+
+        // ... 但没有显式delete释放
+
+	// 注意这里使用 <Resource>, 而不是 <Resource*>
+        // 这是因为 m_ptr 的类型时 T* (而不是 T)
+
+	return 0;
+}
+```
 ```
 BinNode<T> *BinTree<T>::attachAsLeft(BinNode<T> *x, BinTree<T> *&S)
 {
