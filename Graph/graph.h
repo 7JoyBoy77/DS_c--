@@ -31,6 +31,10 @@ private:
                     type(v, u) = UNDETERMINED; // 类型
         }
     }
+    /**
+     * @brief 单连通分量搜索
+     *
+     */
     void BFS(int, int &);                  // （连通域）广度优先搜索算法
     void DFS(Rank, Rank &);                // （连通域）深度优先搜索算法
     void BCC(Rank, Rank &, Stack<Rank> &); // （连通域）基于DFS的双连通分量分解算法
@@ -77,8 +81,13 @@ public:
     virtual EType &type(Rank, Rank) = 0;                  // 边的类型
     virtual Te &edge(Rank, Rank) = 0;                     // 边的数据（该边的确存在）
     virtual int &weight(Rank, Rank) = 0;                  // 边(v, u)的权重
-    // 算法
-    void bfs(Rank);         // 广度优先搜索算法
+
+    /**
+     * @brief 全图广度优先搜索算法
+     *
+     */
+    void bfs(Rank);
+
     void dfs(Rank);         // 深度优先搜索算法
     void bcc(Rank);         // 基于DFS的双连通分量分解算法
     Stack<Tv> *tSort(Rank); // 基于DFS的拓扑排序算法
