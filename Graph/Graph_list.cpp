@@ -1,10 +1,12 @@
 #include "graph.h"
+#include "vector_template.h"
 #include "../List_new/List.h"
 template <typename Tv, typename Te>
 class GraphList : public Graph<typename Tv, typename Te>
 {
 private:
-    // List<Vertex<typename Tv>> V;
+    // 如何设计邻接表内部成员的数据结构取决于查询与增删改查的次数
+    List<Vertex<typename Tv>> V;
     List<List<Edge<typename Te>>> VE;
 
 public:

@@ -102,3 +102,20 @@ __protected 非虚析构函数：__
 基类是 “工具类”，仅作为派生类的成员被组合使用，而非通过继承多态使用。
 ```
 - [ ] BFS树还有跨边 树边，树边来进行bfs生成树的标识
+
+## 这样的邻接表数组包裹着一个链表 ##
+```
+typedef struct VNode
+{
+	VertexType data; //顶点信息
+	ArcNode* firstarc; //指向第一个边结点
+}VNode;
+
+typedef struct
+{
+	VNode adjlist[MaxVertexNum]; //邻接表的头结点数组
+	int vexnum, edgenum; //图中的顶点数和边数
+}AdjGraph;
+————————————————
+
+```
