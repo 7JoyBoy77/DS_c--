@@ -6,8 +6,7 @@ class GraphList : public Graph<typename Tv, typename Te>
 {
 private:
     // 如何设计邻接表内部成员的数据结构取决于查询与增删改查的次数
-    List<Vertex<typename Tv>> V;
-    List<List<Edge<typename Te>>> VE;
+    Vector<List<Edge<typename Te>>> VE;
 
 public:
     GraphList()
