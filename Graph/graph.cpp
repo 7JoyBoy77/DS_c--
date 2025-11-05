@@ -23,6 +23,7 @@ void Graph<Tv, Te>::BFS(int v, int &clock)
     {
         int v = Q.dequeue();
         dTime(v) = ++clock;
+        // 此处从最后一个邻居遍历到第一个邻居
         for (int u = firstNbr(); -1 < u; u = nextNbr(u, v))
         {
             if (status(u) = UNDISCOVERED)
@@ -40,6 +41,7 @@ void Graph<Tv, Te>::BFS(int v, int &clock)
         }
     }
 }
+
 template <typename Tv, typename Te>
 void Graph<Tv, Te>::bfs(Rank i)
 {
@@ -52,3 +54,4 @@ void Graph<Tv, Te>::bfs(Rank i)
             BFS(v, clock);             // 即从诠顶点出収启劢一次BFS
     while (i != (v = (++v % n)));
 }
+// bfs在基类实现，纯虚函数在子类实现，纯虚函数会动态绑定
