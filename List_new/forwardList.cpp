@@ -12,6 +12,7 @@ private:
     ForwardListNode<T> *succ;
 };
 template <typename T>
+
 ForwardListNode<T>::ForwardListNode()
 {
     this->succ = nullptr;
@@ -40,7 +41,6 @@ private:
 
 public:
     ForwardList();
-    // 单链表在某节点尾差比较好，如果直接在最后插时间复杂度高，不适合
     ForwardList<T> *insertSucc(ForwardListNode<T> *ln, const T &e);
 };
 
@@ -52,9 +52,19 @@ ForwardList<T>::ForwardList()
     _size = 0;
 }
 
+/**
+ * @brief
+ *
+ * @tparam T
+ * @param ln
+ * @param e
+ * @return ForwardList<T>*
+ */
 template <typename T>
 ForwardList<T> *ForwardList<T>::insertSucc(ForwardListNode<T> *ln, const T &e)
 {
     _size++;
     return ln->insert(e);
 }
+
+int (*func_ptr)(int);

@@ -152,3 +152,5 @@ void Vector<T>::traverse(VST &visit)
     }
 }
 ```
+- [ ] 这样new分出来的固定的空间 本质上在内存中连续，试用下标访问比较快
+`    _elem = new T[capacity = 2 * (hi - lo)];`

@@ -33,7 +33,7 @@ void selectSort(ListNode<T> *p, unsigned int num)
     for (int i = 0; i < num; i++)
     {
         ListNode<T> *min = findMax(p, num - i);
-        }
+    }
 }
 
 template <typename T>
